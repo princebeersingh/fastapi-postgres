@@ -1,0 +1,10 @@
+1. python
+2. numpy
+3. html css javascript
+4. http networking
+5. linux
+6. ii.django  i.flask iii.fastapi  authentication pagedriving 
+7. api(crud,restful)
+8. database postgres( design secure backup)
+9. devOps ( cloud env)
+10.
