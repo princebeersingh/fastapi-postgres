@@ -1,5 +1,5 @@
 from fastapi import FastAPI,Response,status,HTTPException,Depends
-import schemas
+
 from fastapi.params import Body
 from utils import hashin
 import psycopg2
@@ -7,7 +7,7 @@ from typing import Optional,List
 from sqlalchemy.orm import Session
 from psycopg2.extras import RealDictCursor
 import time
-import models
+import models,schemas,utils
 from database import engine,get_db
 
 models.Base.metadata.create_all(bind=engine)
@@ -164,12 +164,14 @@ def create_user(user:schemas.CreateUser,db:Session=Depends(get_db)):
 
   #hash the passwd
 
-  hashed_pwd=hashin(user.password)
+  hashed_pwd=utils.hashin(user.password)
   user.password=hashed_pwd
+
   new_user=models.User(**user.dict())  #dict method easy to add new feature to the schema
   db.add(new_user)
   db.commit()
   db.refresh(new_user)
+  
   return new_user
 
 
